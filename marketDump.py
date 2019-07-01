@@ -1,11 +1,18 @@
 import requests
 import json
 
-url = 'https://esi.evetech.net/latest/markets/10000003/history/?datasource=tranquility&type_id=34'
+url = 'https://esi.evetech.net/latest/markets/10000003/types/?datasource=tranquility&page=1'
 
 the_forge = requests.get(url)
-data = the_forge.json()[0:1]
+data = the_forge.json()
+
 print(data)
-#for key, value in data.item():
-#    print('date +':', value )
-    
+#print('Volume:', data['volume'])
+#print('Average:', data['average'])
+#for k in data.keys():
+#    print(k +':', data[k])
+count=0
+for i in data:
+    count = count+1
+print('')
+print('Number of Regional Items: ',count)
