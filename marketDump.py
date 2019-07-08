@@ -1,29 +1,22 @@
 import requests
 import json
+import math
 
-#Amarr=
+Amarr='10000043'
 #Dodixie=
 #Hek=
 #Jita=
 #Rens=
 
-def (market_items)
-url = 'https://esi.evetech.net/latest/markets/prices/?datasource=tranquility'
+url = 'https://esi.evetech.net/latest/markets/10000043/history/?datasource=tranquility&type_id=35'
 
 region = requests.get(url)
 allMarkets = region.json()
 
-#print(allMarkets)
-#print('Volume:', data['volume'])
-#print('Average:', data['average'])
-#for k in data.keys():
-#    print(k +':', data[k])
-count=0
-for i in allMarkets:
-    count = count+1
-for average_price in allMarkets:
-    print(average_price)
-print('')
-print('Number of Items on New Eden Market: ',count)
+for products in allMarkets[-7:]:
+    print(products['date'],' volume per day:', products['volume'])
 
-market_items()
+print('')
+print(type(products['volume']))
+print('allMarkets=',type(allMarkets))
+print('products=',type(products))
