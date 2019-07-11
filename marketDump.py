@@ -1,3 +1,6 @@
+# I'm hoping to be able to calculate Sales to Volume ratios on items being sold at each station.\
+# The program should allow you to see how fast items sell in station when station trading.
+# This is the first Python program I've ever written. Don't laugh.
 import requests
 import json
 import math
