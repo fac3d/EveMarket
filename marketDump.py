@@ -26,6 +26,8 @@ def item_srv():
     SVR= (avg_7day_sales/avg_7day_vol)*100
     return SRV
 
+item_srv()
+
 print('')
 print('Average 7-Day Volume=',avg_7day_vol)
 print('Average 7-Day Sales=',avg_7day_sales)
