@@ -6,16 +6,18 @@ import json
 import math
 
 # setting the URL's. Going to do this better later on.
-Amarr='https://esi.evetech.net/latest/markets/10000043/history/?datasource=tranquility&type_id=3536'
-Dodixie='https://esi.evetech.net/latest/markets/10000032/history/?datasource=tranquility&type_id=17634'
-Hek='https://esi.evetech.net/latest/markets/10000042/history/?datasource=tranquility&type_id=17634'
-Jita='https://esi.evetech.net/latest/markets/10000002/history/?datasource=tranquility&type_id=17634'
-Rens='https://esi.evetech.net/latest/markets/10000030/history/?datasource=tranquility&type_id=17634'
+Station=raw_input('What station do you want to query?')
+
+Amarr='10000043'
+Dodixie='10000032'
+Hek='10000042'
+Jita='10000002'
+Rens='10000030'
 
 # function to get the SRV calculation.
 # Not calculating correctly. Pulling wrong values for sales and volume. Need to research API for this.
 def product_svr(station):
-    url = station
+    url = 'https://esi.evetech.net/latest/markets/'+Station+'/history/?datasource=tranquility&type_id=3536'
 
     region = requests.get(url)
     allMarkets = region.json()
