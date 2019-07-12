@@ -22,14 +22,14 @@ Rens_hub='60004588'
 
 # function to get the SRV calculation.
 # Not calculating correctly. Pulling wrong values for sales and volume. Need to research API for this.
-def product_svr(station):
+def product_svr(Station):
     url = 'https://esi.evetech.net/latest/markets/'+Station+'/history/?datasource=tranquility&type_id=3536'
 
     region = requests.get(url)
-    allMarkets = region.json()
+    all_region_Markets = region.json()
     volumes=[]
     sales=[]
-    for products in allMarkets[-7:]:
+    for products in all_region_Markets[-7:]:
         #print('sales per day:', products['order_count'])
         print(products['date'],' volume per day:', products['volume'])
         #print(products)
