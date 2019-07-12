@@ -14,11 +14,11 @@ Hek='10000042'
 Jita='10000002'
 Rens='10000030'
 
-Amarr_hub=''
-Dodixie_hub=''
-Hek_hub=''
+Amarr_hub='60008494'
+Dodixie_hub='60011866'
+Hek_hub='60005686'
 Jita_hub='60003760'
-Rens_hub=''
+Rens_hub='60004588'
 
 # function to get the SRV calculation.
 # Not calculating correctly. Pulling wrong values for sales and volume. Need to research API for this.
