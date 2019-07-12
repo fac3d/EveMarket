@@ -14,6 +14,12 @@ Hek='10000042'
 Jita='10000002'
 Rens='10000030'
 
+Amarr_hub=''
+Dodixie_hub=''
+Hek_hub=''
+Jita_hub='60003760'
+Rens_hub=''
+
 # function to get the SRV calculation.
 # Not calculating correctly. Pulling wrong values for sales and volume. Need to research API for this.
 def product_svr(station):
