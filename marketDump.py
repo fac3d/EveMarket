@@ -8,12 +8,14 @@ import math
 # setting the URL's. Going to do this better later on.
 Station=raw_input('What station do you want to query?')
 
+#region_id's
 Amarr='10000043'
 Dodixie='10000032'
 Hek='10000042'
 Jita='10000002'
 Rens='10000030'
 
+#location_id's
 Amarr_hub='60008494'
 Dodixie_hub='60011866'
 Hek_hub='60005686'
