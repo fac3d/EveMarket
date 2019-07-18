@@ -6,7 +6,7 @@ import json
 import math
 
 # setting the URL's. Going to do this better later on.
-Station=raw_input('What station do you want to query?')
+station_name = raw_input('What station do you want to query?')
 
 #region_id's
 Amarr='10000043'
@@ -24,7 +24,7 @@ Rens_hub='60004588'
 
 # function to get the SRV calculation.
 # Not calculating correctly. Pulling wrong values for sales and volume. Need to research API for this.
-def product_svr():
+def product_svr(Station):
     url = 'https://esi.evetech.net/latest/markets/'+Station+'/history/?datasource=tranquility&type_id=3536'
 
     region = requests.get(url)
@@ -55,7 +55,7 @@ def product_svr():
 # this is the real value to return    
     return ratio
 
-SVR = product_svr(Station)
+SVR = product_svr(station_name)
 
 # Output SRV value
 print(Station + ' Sales to Volume Ratio (%) =', SVR)
