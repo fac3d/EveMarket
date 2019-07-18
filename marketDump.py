@@ -24,7 +24,7 @@ Rens_hub='60004588'
 
 # function to get the SRV calculation.
 # Not calculating correctly. Pulling wrong values for sales and volume. Need to research API for this.
-def product_svr(Station):
+def product_svr():
     url = 'https://esi.evetech.net/latest/markets/'+Station+'/history/?datasource=tranquility&type_id=3536'
 
     region = requests.get(url)
@@ -55,16 +55,7 @@ def product_svr(Station):
 # this is the real value to return    
     return ratio
 
-#this will change when I update the URL above
-SVR_A = product_svr(Amarr)
-#SVR_J = product_svr(Jita)
-#SVR_R = product_svr(Rens)
-#SVR_D = product_svr(Dodixie)
-#SVR_H = product_svr(Hek)
+SVR = product_svr(Station)
 
 # Output SRV value
-print('Amarr Sales to Volume Ratio (%) =', SVR_A)
-#print('Jita Sales to Volume Ratio (%) =', SVR_J)
-#print('Rens Sales to Volume Ratio (%) =', SVR_R)
-#print('Dodixie Sales to Volume Ratio (%) =', SVR_D)
-#print('Hek Sales to Volume Ratio (%) =', SVR_H)
+print(Station + ' Sales to Volume Ratio (%) =', SVR)
