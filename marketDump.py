@@ -48,7 +48,7 @@ def product_svr(Station):
     #print('Average 7-Day Volume=',avg_7day_vol)
     #print('')
     #print('volume=',type(products['volume']))
-    #print('allMarkets=',type(allMarkets))
+    #print('allMarkets=',type(all_region_Markets))
     #print('products=',type(products))
     
 # this is the real value to return    
