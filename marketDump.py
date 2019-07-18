@@ -34,19 +34,20 @@ def product_svr(Station):
     all_products = daily_items.json()
     all_region_Markets = region.json()
     
-    #number of items on market per day
+    # number of items on market per day
     volumes=[]
-    #number of items sold per day
+    # number of items sold per day
     sales=[]
     
-    #find items sold per day
+    # find items sold per day
     for products_sold in all_region_Markets[-7:]:
         #print('sales per day:', products['volume'])
         print(products_sold['date'],' sales per day:', products_sold['volume'])
         #print(products_sold)
         sales.append(products_sold['volume'])
     
-    #find total items on market
+    # Find total items on market. 
+    # THIS NEEDS A SERIOUS REWORK!
     for Items_total in all_products[-7:]:
         #print('Items per day:', all_products['volume_total'])
         print(Items_total['issued'],' sales per day:', Items_total['volume_total'])
