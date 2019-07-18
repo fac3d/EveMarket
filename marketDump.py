@@ -26,18 +26,33 @@ Rens_hub='60004588'
 # Not calculating correctly. Pulling wrong values for sales and volume. Need to research API for this.
 def product_svr(Station):
     url = 'https://esi.evetech.net/latest/markets/'+Station+'/history/?datasource=tranquility&type_id=3536'
-
+    url2 = 'https://esi.evetech.net/latest/markets/10000043/orders/?datasource=tranquility&order_type=sell&page=1&type_id=3536'
+    
     region = requests.get(url)
+    daily_items = requests.get(url2)
+    
+    all_products = daily_items.json()
     all_region_Markets = region.json()
+    
+    #number of items on market per day
     volumes=[]
+    #number of items sold per day
     sales=[]
-    for products in all_region_Markets[-7:]:
-        #print('sales per day:', products['order_count'])
-        #This isn't correct. Need to find another way to compute 'volume per day'.
-        print(products['date'],' volume per day:', products['volume'])
-        #print(products)
-        volumes.append(products['volume'])
-        sales.append(products['order_count'])
+    
+    #find items sold per day
+    for products_sold in all_region_Markets[-7:]:
+        #print('sales per day:', products['volume'])
+        print(products_sold['date'],' sales per day:', products_sold['volume'])
+        #print(products_sold)
+        sales.append(products_sold['volume'])
+    
+    #find total items on market
+    for Items_total in all_products[-7:]:
+        #print('Items per day:', all_products['volume_total'])
+        print(Items_total['issued'],' sales per day:', Items_total['volume_total'])
+        #print(Items_sold)
+        volumes.append(Items_total['volume_total'])
+        
 
     avg_7day_sales= sum(sales)/7
     avg_7day_vol= sum(volumes)/7
@@ -48,7 +63,7 @@ def product_svr(Station):
     #print('Average 7-Day Sales=',avg_7day_sales)
     #print('Average 7-Day Volume=',avg_7day_vol)
     #print('')
-    #print('volume=',type(products['volume']))
+    #print('Items on market=',type(products['volume_total']))
     #print('allMarkets=',type(all_region_Markets))
     #print('products=',type(products))
     
