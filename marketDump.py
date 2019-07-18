@@ -33,6 +33,7 @@ def product_svr(Station):
     sales=[]
     for products in all_region_Markets[-7:]:
         #print('sales per day:', products['order_count'])
+        #This isn't correct. Need to find another way to compute 'volume per day'.
         print(products['date'],' volume per day:', products['volume'])
         #print(products)
         volumes.append(products['volume'])
