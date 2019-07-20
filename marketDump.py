@@ -7,7 +7,7 @@ import math
 from datetime import timedelta
 
 # setting the URL's. Going to do this better later on.
-station_name = raw_input('What station do you want to query?')
+station_name = input('What station do you want to query?')
 
 #region_id's
 Amarr='10000043'
