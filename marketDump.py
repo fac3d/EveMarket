@@ -41,8 +41,8 @@ def product_total_sold():
         if products_sold['date'] > date.today() - timedelta(days=7):
             sales.append(products_sold['volume'])
 
-    avg_7day_sales= sum(sales)
-    return avg_7day_sales
+    daily_sales= sum(sales)
+    return daily_sales
     
 def product_total_daily():
     url2 = 'https://esi.evetech.net/latest/markets/10000043/orders/?datasource=tranquility&order_type=sell&page=1&type_id=34'
@@ -59,12 +59,12 @@ def product_total_daily():
         if items_total['issued'] > datetime.today() - timedelta(days=7):
             volumes.append(items_total['volume_total'])
         
-        avg_7day_vol= sum(volumes)
-        return avg_7day_vol
+        daily_vol= sum(volumes)
+        return daily_vol
 
-added_items = product_total_sold()
-number_items = product_total_daily()
+sold_items = product_total_sold()
+added_items = product_total_daily()
 SVR= (sold_items/added_items)*100
     
 # Output SRV value
-print(Station + ' Sales to Volume Ratio (%) =', SVR)
+print('Amarr Sales to Volume Ratio (%) =', SVR)
