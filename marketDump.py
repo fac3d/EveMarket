@@ -4,6 +4,7 @@
 import requests
 import json
 import math
+from datetime import timedelta
 
 # setting the URL's. Going to do this better later on.
 station_name = raw_input('What station do you want to query?')
@@ -24,27 +25,32 @@ Rens_hub='60004588'
 
 # function to get the SRV calculation.
 # Not calculating correctly. Pulling wrong values for sales and volume. Need to research API for this.
-def product_svr(Station):
-    url = 'https://esi.evetech.net/latest/markets/'+Station+'/history/?datasource=tranquility&type_id=3536'
-    url2 = 'https://esi.evetech.net/latest/markets/10000043/orders/?datasource=tranquility&order_type=sell&page=1&type_id=3536'
-    
+def product_total_sold():
+    url = 'https://esi.evetech.net/latest/markets/10000043/history/?datasource=tranquility&type_id=3536'
     region = requests.get(url)
-    daily_items = requests.get(url2)
-    
-    all_products = daily_items.json()
     all_region_Markets = region.json()
-    
-    # number of items on market per day
-    volumes=[]
+
     # number of items sold per day
     sales=[]
-    
+
     # find items sold per day
-    for products_sold in all_region_Markets[-7:]:
+    for products_sold in all_region_Markets:
         #print('sales per day:', products['volume'])
         print(products_sold['date'],' sales per day:', products_sold['volume'])
         #print(products_sold)
-        sales.append(products_sold['volume'])
+        if products_sold['date'] > date.today() - timedelta(days=7) and products_sold['location'] == Amarr_hub:
+            sales.append(products_sold['volume'])
+
+    avg_7day_sales= sum(sales)/7
+    return avg_7day_sales
+    
+def product_total_daily():
+    url2 = 'https://esi.evetech.net/latest/markets/10000043/orders/?datasource=tranquility&order_type=sell&page=1&type_id=3536'
+    daily_items = requests.get(url2)
+    all_products = daily_items.json()
+
+    # number of items on market per day
+    volumes=[]
     
     # Find total items on market. 
     # THIS NEEDS A SERIOUS REWORK!
@@ -54,24 +60,12 @@ def product_svr(Station):
         #print(Items_sold)
         volumes.append(Items_total['volume_total'])
         
+        avg_7day_vol= sum(volumes)/7
+        return avg_7day_vol
 
-    avg_7day_sales= sum(sales)/7
-    avg_7day_vol= sum(volumes)/7
-    ratio= (avg_7day_sales/avg_7day_vol)*100
+sold_items = product_total_sold()
+number_items = product_total_daily()
+SVR= (sold_items/number_items)*100
     
-# ignore these. They are just for my sanity
-    #print('')
-    #print('Average 7-Day Sales=',avg_7day_sales)
-    #print('Average 7-Day Volume=',avg_7day_vol)
-    #print('')
-    #print('Items on market=',type(products['volume_total']))
-    #print('allMarkets=',type(all_region_Markets))
-    #print('products=',type(products))
-    
-# this is the real value to return    
-    return ratio
-
-SVR = product_svr(station_name)
-
 # Output SRV value
 print(Station + ' Sales to Volume Ratio (%) =', SVR)
