@@ -3,7 +3,6 @@
 # This is the first Python program I've ever written. Don't laugh.
 import requests
 import json
-import math
 from datetime import timedelta
 
 # setting the URL's. Going to do this better later on.
