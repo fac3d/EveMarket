@@ -38,7 +38,7 @@ def product_total_sold():
         #print('sales per day:', products['volume'])
         print(products_sold['date'],' sales per day:', products_sold['volume'])
         #print(products_sold)
-        if products_sold['date'] > date.today() - timedelta(days=7) and products_sold['location'] == Amarr_hub:
+        if products_sold['date'] > date.today() - timedelta(days=7):
             sales.append(products_sold['volume'])
 
     avg_7day_sales= sum(sales)/7
