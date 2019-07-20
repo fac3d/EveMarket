@@ -15,7 +15,7 @@ Hek='10000042'
 Jita='10000002'
 Rens='10000030'
 
-#location_id's
+#location_id's (keeping these in here so I don't have to look them up again.)
 Amarr_hub='60008494'
 Dodixie_hub='60011866'
 Hek_hub='60005686'
