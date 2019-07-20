@@ -44,7 +44,7 @@ def product_total_sold():
     daily_sales= sum(sales)
     return daily_sales
     
-def product_total_daily():
+def product_total_added():
     url2 = 'https://esi.evetech.net/latest/markets/10000043/orders/?datasource=tranquility&order_type=sell&page=1&type_id=34'
     daily_items = requests.get(url2)
     all_products = daily_items.json()
@@ -63,7 +63,7 @@ def product_total_daily():
         return daily_vol
 
 sold_items = product_total_sold()
-added_items = product_total_daily()
+added_items = product_total_added()
 SVR= (sold_items/added_items)*100
     
 # Output SRV value
