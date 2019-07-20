@@ -61,9 +61,9 @@ def product_total_daily():
         avg_7day_vol= sum(volumes)
         return avg_7day_vol
 
-sold_items = product_total_sold()
+added_items = product_total_sold()
 number_items = product_total_daily()
-SVR= (sold_items/number_items)*100
+SVR= (sold_items/added_items)*100
     
 # Output SRV value
 print(Station + ' Sales to Volume Ratio (%) =', SVR)
