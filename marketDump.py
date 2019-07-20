@@ -41,7 +41,7 @@ def product_total_sold():
         if products_sold['date'] > date.today() - timedelta(days=7):
             sales.append(products_sold['volume'])
 
-    avg_7day_sales= sum(sales)/7
+    avg_7day_sales= sum(sales)
     return avg_7day_sales
     
 def product_total_daily():
@@ -52,15 +52,13 @@ def product_total_daily():
     # number of items on market per day
     volumes=[]
     
-    # Find total items on market. 
-    # THIS NEEDS A SERIOUS REWORK!
-    for Items_total in all_products[-7:]:
-        #print('Items per day:', all_products['volume_total'])
-        print(Items_total['issued'],' sales per day:', Items_total['volume_total'])
-        #print(Items_sold)
-        volumes.append(Items_total['volume_total'])
+    # Find total items added to market in 7 days. 
+    for items_total in all_products[]:
+        print('Items added per day:', items_total['volume_total'])
+        if items_total['issued'] > date.today() - timedelta(days=7):
+            volumes.append(items_total['volume_total'])
         
-        avg_7day_vol= sum(volumes)/7
+        avg_7day_vol= sum(volumes)
         return avg_7day_vol
 
 sold_items = product_total_sold()
