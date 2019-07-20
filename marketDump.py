@@ -7,7 +7,7 @@ import math
 from datetime import timedelta
 
 # setting the URL's. Going to do this better later on.
-station_name = input('What station do you want to query?')
+#station_name = input('What station do you want to query?')
 
 #region_id's
 Amarr='10000043'
@@ -26,7 +26,7 @@ Rens_hub='60004588'
 # function to get the SRV calculation.
 # Not calculating correctly. Pulling wrong values for sales and volume. Need to research API for this.
 def product_total_sold():
-    url = 'https://esi.evetech.net/latest/markets/10000043/history/?datasource=tranquility&type_id=34'
+    url = 'https://esi.evetech.net/latest/markets/' + Amarr +'10000043/history/?datasource=tranquility&type_id=34'
     region = requests.get(url)
     all_region_Markets = region.json()
 
@@ -45,7 +45,7 @@ def product_total_sold():
     return daily_sales
     
 def product_total_added():
-    url2 = 'https://esi.evetech.net/latest/markets/10000043/orders/?datasource=tranquility&order_type=sell&page=1&type_id=34'
+    url2 = 'https://esi.evetech.net/latest/markets/' + Amarr +'/orders/?datasource=tranquility&order_type=sell&page=1&type_id=34'
     daily_items = requests.get(url2)
     all_products = daily_items.json()
 
