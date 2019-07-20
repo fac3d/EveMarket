@@ -56,7 +56,7 @@ def product_total_daily():
     for items_total in all_products[]:
         print('Items added per day:', items_total['volume_total'])
         # Will this work with 'issued' being date and time format?
-        if items_total['issued'] > date.today() - timedelta(days=7):
+        if items_total['issued'] > datetime.today() - timedelta(days=7):
             volumes.append(items_total['volume_total'])
         
         avg_7day_vol= sum(volumes)
