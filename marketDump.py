@@ -26,7 +26,7 @@ Rens_hub='60004588'
 # function to get the SRV calculation.
 # Not calculating correctly. Pulling wrong values for sales and volume. Need to research API for this.
 def product_total_sold():
-    url = 'https://esi.evetech.net/latest/markets/10000043/history/?datasource=tranquility&type_id=3536'
+    url = 'https://esi.evetech.net/latest/markets/10000043/history/?datasource=tranquility&type_id=34'
     region = requests.get(url)
     all_region_Markets = region.json()
 
@@ -45,7 +45,7 @@ def product_total_sold():
     return avg_7day_sales
     
 def product_total_daily():
-    url2 = 'https://esi.evetech.net/latest/markets/10000043/orders/?datasource=tranquility&order_type=sell&page=1&type_id=3536'
+    url2 = 'https://esi.evetech.net/latest/markets/10000043/orders/?datasource=tranquility&order_type=sell&page=1&type_id=34'
     daily_items = requests.get(url2)
     all_products = daily_items.json()
 
