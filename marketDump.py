@@ -25,7 +25,7 @@ Rens_hub='60004588'
 # function to get the SRV calculation.
 # Calculating SVR by pulling total items sold for the week(product_total_sold) and total added for the week (product_total_added).
 def product_total_sold():
-    url = 'https://esi.evetech.net/latest/markets/' + Amarr + '/history/?datasource=tranquility&type_id=34'
+    url = 'https://esi.evetech.net/latest/markets/' + Amarr + '/history/?datasource=tranquility&type_id=42840'
     region = requests.get(url)
     all_region_Markets = region.json()
 
@@ -41,11 +41,11 @@ def product_total_sold():
             sales.append(products_sold['volume'])
 
     daily_sales= sum(sales)
-    print(daily_sales)
+    print('Daily sales: ',daily_sales)
     return daily_sales
 
 def product_total_added():
-    url2 = 'https://esi.evetech.net/latest/markets/' + Amarr +'/orders/?datasource=tranquility&order_type=sell&page=1&type_id=34'
+    url2 = 'https://esi.evetech.net/latest/markets/' + Amarr +'/orders/?datasource=tranquility&order_type=sell&page=1&type_id=42840'
     daily_items = requests.get(url2)
     all_products = daily_items.json()
 
@@ -54,19 +54,18 @@ def product_total_added():
 
     # Find total items added to market in 7 days.
     for items_total in all_products:
-        print('Items added per day:', items_total['volume_total'])
+        #print('Items added per day:', items_total['volume_total'])
         # Will this work with 'issued' being date and time format?
-        print(type(items_total))
         if items_total['issued'] > str(datetime.today() - timedelta(days=7)):
             volumes.append(items_total['volume_total'])
 
-        print(volumes)
-        daily_vol= sum(volumes)
-        return daily_vol
+    daily_vol= sum(volumes)
+    print('Items added: ', daily_vol)
+    return daily_vol
 
 sold_items = product_total_sold()
 added_items = product_total_added()
-#SVR= (sold_items/added_items)*100
+SVR= (sold_items/added_items)*100
 
 # Output SRV value
-#print('Amarr Sales to Volume Ratio (%) =', SVR)
+print('Amarr Sales to Volume Ratio (%) =', SVR)
