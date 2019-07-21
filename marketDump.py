@@ -24,8 +24,8 @@ Rens_hub='60004588'
 
 # function to get the SRV calculation.
 # Not calculating correctly. Pulling wrong values for sales and volume. Need to research API for this.
-def product_total_sold('''station'''):
-    url = 'https://esi.evetech.net/latest/markets/' + Amarr'''station''' +'10000043/history/?datasource=tranquility&type_id=34'
+def product_total_sold():
+    url = 'https://esi.evetech.net/latest/markets/' + Amarr +'10000043/history/?datasource=tranquility&type_id=34'
     region = requests.get(url)
     all_region_Markets = region.json()
 
@@ -43,8 +43,8 @@ def product_total_sold('''station'''):
     daily_sales= sum(sales)
     return daily_sales
     
-def product_total_added('''station'''):
-    url2 = 'https://esi.evetech.net/latest/markets/' + Amarr'''station''' +'/orders/?datasource=tranquility&order_type=sell&page=1&type_id=34'
+def product_total_added():
+    url2 = 'https://esi.evetech.net/latest/markets/' + Amarr +'/orders/?datasource=tranquility&order_type=sell&page=1&type_id=34'
     daily_items = requests.get(url2)
     all_products = daily_items.json()
 
@@ -61,8 +61,8 @@ def product_total_added('''station'''):
         daily_vol= sum(volumes)
         return daily_vol
 
-sold_items = product_total_sold('''station_name''')
-added_items = product_total_added('''station_name''')
+sold_items = product_total_sold()
+added_items = product_total_added()
 SVR= (sold_items/added_items)*100
     
 # Output SRV value
