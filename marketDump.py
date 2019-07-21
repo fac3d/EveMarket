@@ -3,7 +3,7 @@
 # This is the first Python program I've ever written. Don't laugh.
 import requests
 import json
-from datetime import timedelta
+from datetime import timedelta, date, datetime
 
 # setting the URL's. Going to do this better later on.
 #station_name = input('What station do you want to query?')
@@ -23,9 +23,9 @@ Jita_hub='60003760'
 Rens_hub='60004588'
 
 # function to get the SRV calculation.
-# Not calculating correctly. Pulling wrong values for sales and volume. Need to research API for this.
+# Calculating SVR by pulling total items sold for the week(product_total_sold) and total added for the week (product_total_added).
 def product_total_sold():
-    url = 'https://esi.evetech.net/latest/markets/' + Amarr +'10000043/history/?datasource=tranquility&type_id=34'
+    url = 'https://esi.evetech.net/latest/markets/' + Amarr + '/history/?datasource=tranquility&type_id=34'
     region = requests.get(url)
     all_region_Markets = region.json()
 
@@ -33,16 +33,17 @@ def product_total_sold():
     sales=[]
 
     # find items sold per day
+    #can't figure out datetime usage. Convert to iso?
     for products_sold in all_region_Markets:
-        #print('sales per day:', products['volume'])
-        print(products_sold['date'],' sales per day:', products_sold['volume'])
+        #print(products_sold['date'],' sales per day:', products_sold['volume'])
         #print(products_sold)
-        if products_sold['date'] > date.today() - timedelta(days=7):
+        if products_sold['date'] > str(date.today() - timedelta(days=7)):
             sales.append(products_sold['volume'])
 
     daily_sales= sum(sales)
+    print(daily_sales)
     return daily_sales
-    
+
 def product_total_added():
     url2 = 'https://esi.evetech.net/latest/markets/' + Amarr +'/orders/?datasource=tranquility&order_type=sell&page=1&type_id=34'
     daily_items = requests.get(url2)
@@ -50,20 +51,22 @@ def product_total_added():
 
     # number of items on market per day
     volumes=[]
-    
-    # Find total items added to market in 7 days. 
-    for items_total in all_products[]:
+
+    # Find total items added to market in 7 days.
+    for items_total in all_products:
         print('Items added per day:', items_total['volume_total'])
         # Will this work with 'issued' being date and time format?
-        if items_total['issued'] > datetime.today() - timedelta(days=7):
+        print(type(items_total))
+        if items_total['issued'] > str(datetime.today() - timedelta(days=7)):
             volumes.append(items_total['volume_total'])
-        
+
+        print(volumes)
         daily_vol= sum(volumes)
         return daily_vol
 
 sold_items = product_total_sold()
 added_items = product_total_added()
-SVR= (sold_items/added_items)*100
-    
+#SVR= (sold_items/added_items)*100
+
 # Output SRV value
-print('Amarr Sales to Volume Ratio (%) =', SVR)
+#print('Amarr Sales to Volume Ratio (%) =', SVR)
