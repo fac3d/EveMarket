@@ -12,17 +12,6 @@ Jita = '10000002'
 Rens = '10000030'
 Dodixie = '10000032'
 
-file = 'Amarr_MarketOrders_REV1.xlsx'
-data = pd.ExcelFile(file)
-types = data.parse(0)
-print(type(data))
-
-#item_list = requests.get(df1[0])
-#json_list = item_list.json()
-
-#print(type(json_list))
-#print(json_list)
-timeDiff = str(date.today() - timedelta(days=7))
 def product_total_sold(number):
     url = 'https://esi.evetech.net/latest/markets/' + Amarr + '/history/?datasource=tranquility&type_id='+ str(number)
     region = requests.get(url)
@@ -57,8 +46,16 @@ def product_total_added(number):
     #print('                 Items added: ', weekly_vol)
     return weekly_vol
 
+file = 'Amarr_MarketOrders_REV1.xlsx'
+data = pd.ExcelFile(file)
+types = data.parse(0)
+print(types)
+print(type(types))
+
 count = 0
-for type_id in types[:,0]:
+timeDiff = str(date.today() - timedelta(days=7))
+for type_id in types:
+    #try excludes any sold_items/0 issues
     try:
         sold_items = product_total_sold(type_id)
         added_items = product_total_added(type_id)
