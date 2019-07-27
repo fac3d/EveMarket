@@ -24,9 +24,10 @@ url = 'https://esi.evetech.net/latest/markets/'+ region +'/types/?datasource=tra
 item_list = requests.get(url)
 json_list = item_list.json()
 
-#print(type(json_list))
 #print(json_list)
 timeDiff = str(date.today() - timedelta(days=7))
+
+#gets total number of items sold in a region
 def product_total_sold(number):
     url = 'https://esi.evetech.net/latest/markets/' + region + '/history/?datasource=tranquility&type_id='+ str(number)
     region = requests.get(url)
@@ -44,6 +45,7 @@ def product_total_sold(number):
     #print('Item Id: ' + str(number) ,'Weekly sales: ',weekly_sales)
     return weekly_sales
 
+#get total number of items posted in a region
 def product_total_added(number):
     url2 = 'https://esi.evetech.net/latest/markets/' + region +'/orders/?datasource=tranquility&order_type=sell&page=1&type_id='+ str(number)
     daily_items = requests.get(url2)
@@ -61,6 +63,7 @@ def product_total_added(number):
     #print('                 Items added: ', weekly_vol)
     return weekly_vol
 
+#begin computation of SVR
 count = 0
 for type_id in json_list:
     try:
@@ -70,7 +73,7 @@ for type_id in json_list:
     except:
         continue
 
-    # Output SRV value
+# Output SRV value
     if SVR >= 100:
         count += 1
         print('Item Id: ' + str(type_id), str(system) + 'Sales to Volume Ratio (%) =', int(SVR))
