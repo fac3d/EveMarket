@@ -54,7 +54,7 @@ print(type(types))
 
 count = 0
 timeDiff = str(date.today() - timedelta(days=7))
-for type_id in types:
+for type_id in types['TypeID']:
     #try excludes any sold_items/0 issues
     try:
         sold_items = product_total_sold(type_id)
