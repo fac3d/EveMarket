@@ -49,8 +49,6 @@ def product_total_added(number):
 
 file = 'Market_Orders.csv'
 data = pd.read_csv(file)
-#print(data)
-
 
 count = 0
 timeDiff = date.today() - timedelta(days=7)
@@ -64,7 +62,7 @@ for type_id in data['TypeID']:
         continue
 
     # Output SRV value
-    if SVR >= 100:
+    if SVR >= 100 and added_items > 10:
         count += 1
         print('Item Id: ' + str(int(type_id)) + ' Amarr Sales to Volume Ratio (%) =', int(SVR))
 
