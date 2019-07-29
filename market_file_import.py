@@ -20,9 +20,9 @@ def product_total_sold(number):
     sales = []
     # find items sold per day
     for products_sold in all_region_Markets:
-        print(products_sold['date'],' sales per day:', products_sold['volume'])
+        #print(products_sold['date'], number,' sales per day:', products_sold['volume'])
         #print(products_sold)
-        if products_sold['date'] > timeDiff:
+        if products_sold['date'] > str(timeDiff):
             sales.append(products_sold['volume'])
 
     weekly_sales= sum(sales)
@@ -38,27 +38,27 @@ def product_total_added(number):
     volumes=[]
     # Find total items added to market in 7 days.
     for items_total in all_products:
-        print('Items added per day:', items_total['volume_total'])
-        if items_total['issued'] > timeDiff:
+
+        if items_total['issued'] > str(timeDiff):
             volumes.append(items_total['volume_total'])
+            #print('Items added per day:', items_total['volume_total'])
 
     weekly_vol= sum(volumes)
-    #print('                 Items added: ', weekly_vol)
+    #print('Items added: ', weekly_vol)
     return weekly_vol
 
-file = 'Amarr_MarketOrders_REV1.xlsx'
-data = pd.ExcelFile(file)
-types = data.parse(0)
-print(types)
-print(type(types))
+file = 'Market_Orders.csv'
+data = pd.read_csv(file)
+#print(data)
+
 
 count = 0
-timeDiff = str(date.today() - timedelta(days=7))
-for type_id in types['TypeID']:
+timeDiff = date.today() - timedelta(days=7)
+for type_id in data['TypeID']:
     #try excludes any sold_items/0 issues
     try:
-        sold_items = product_total_sold(type_id)
-        added_items = product_total_added(type_id)
+        sold_items = product_total_sold(int(type_id))
+        added_items = product_total_added(int(type_id))
         SVR= (sold_items/added_items)*100
     except:
         continue
@@ -66,7 +66,7 @@ for type_id in types['TypeID']:
     # Output SRV value
     if SVR >= 100:
         count += 1
-        print('Item Id: ' + str(type_id) ,'Amarr Sales to Volume Ratio (%) =', int(SVR))
+        print('Item Id: ' + str(int(type_id)) + ' Amarr Sales to Volume Ratio (%) =', int(SVR))
 
 print('')
 print(count,' Items')
