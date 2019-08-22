@@ -55,7 +55,7 @@ print(datetime.today())
 #print(type(data[['TypeID']]))
 count = 0
 timeDiff = date.today() - timedelta(days=14)
-df = pd.DataFrame()
+df1 = pd.DataFrame()
 for type_id, item_name in data.iterrows():
     #try excludes any sold_items/0 issues
     try:
@@ -69,13 +69,14 @@ for type_id, item_name in data.iterrows():
     margin = ((float(item_name['Sell Price']) - float(item_name['Buy Price']))/float(item_name['Buy Price']))*100
     if SVR >= 100 and added_items >= 14 and margin > 10:
         count += 1
-        #df2 = pd.DataFrame([type_id, item_name['Item'], int(SVR)])
-        #print(df2)
+        df2 = pd.DataFrame[int(type_id),item_name['Item'],int(SVR)]
+        df = df1.append(df2, ignore_index=True)
         print(str(int(type_id)) + ': ' + item_name['Item'] + ' Amarr Sales to Volume Ratio (%) =', int(SVR))
         print('Margin = %.2f' % margin,'%')
         print('Total Sold:',sold_items,'Total Posted:',added_items)
 #    else:
 #        print(str(int(type_id)) + ': ' + item_name['Item'])
+print(df)
 
 print(datetime.today())
 #print(df)
