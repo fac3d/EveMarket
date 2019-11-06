@@ -5,6 +5,7 @@ import json
 import pandas as pd
 import numpy as np
 import product_total_sold from functions
+import product_total_added from functions
 from datetime import timedelta, date, datetime
 
 Amarr = '10000043'
@@ -12,24 +13,6 @@ Hek = '10000042'
 Jita = '10000002'
 Rens = '10000030'
 Dodixie = '10000032'
-
-def product_total_added(number):
-    url2 = 'https://esi.evetech.net/latest/markets/' + Amarr +'/orders/?datasource=tranquility&order_type=sell&page=1&type_id='+ str(number)
-    daily_items = requests.get(url2)
-    all_products = daily_items.json()
-    #print(all_products)
-    # number of items on market per day
-    volumes=[]
-    # Find total items added to market in 7 days.
-    for items_total in all_products:
-        #print(items_total.keys())
-        if items_total['issued'] > str(timeDiff):
-            volumes.append(items_total['volume_total'])
-            #print('Items added per day:', items_total['volume_total'])
-
-    weekly_vol= sum(volumes)
-    #print('Items added: ', weekly_vol)
-    return weekly_vol
 
 file = 'Market_Orders.csv'
 data = pd.read_csv(file, index_col=0)
