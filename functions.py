@@ -1,3 +1,26 @@
+#######################################################################################################################
+# Filename: function.py
+#
+# Date:     21-Nov-2019
+#
+# Author:   
+#
+# Purpose:  File contains functions that interface to the esi.evetech.net url.
+#
+# Revision History: 
+# Date:         Person:         Changes:
+# 
+#######################################################################################################################
+
+
+
+#######################################################################################################################
+#
+# Function product_total_sold()
+#
+# Purpose: gets market data from esi.evetech.net, returns weekly market data. 
+#
+########################################################################################################################
 def product_total_sold(number):
     url = 'https://esi.evetech.net/latest/markets/' + Amarr + '/history/?datasource=tranquility&type_id='+ str(number)
     region = requests.get(url)
@@ -16,6 +39,14 @@ def product_total_sold(number):
     #print('Item Id: ' + str(number) ,'Weekly sales: ',weekly_sales)
     return weekly_sales
 
+
+#######################################################################################################################
+#
+# Function product_total_added()
+#
+# Purpose: gets market data from esi.evetech.net, returns weekly volume data. 
+#
+########################################################################################################################
 def product_total_added(number):
     url2 = 'https://esi.evetech.net/latest/markets/' + Amarr +'/orders/?datasource=tranquility&order_type=sell&page=1&type_id='+ str(number)
     daily_items = requests.get(url2)
