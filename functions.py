@@ -1,3 +1,7 @@
+#
+# Filename: functions.py
+#
+
 def product_total_sold(number):
     url = 'https://esi.evetech.net/latest/markets/' + Amarr + '/history/?datasource=tranquility&type_id='+ str(number)
     region = requests.get(url)
